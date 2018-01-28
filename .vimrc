@@ -62,7 +62,8 @@ let g:tslime_always_current_session = 1
 let mapleader=","
 
 " Run python files
-autocmd FileType python nnoremap<buffer> <F5> :call VimuxRunCommand("python " . bufname("%"))<CR>
+"autocmd FileType python nnoremap<buffer> <F5> :call VimuxRunCommand("python " . bufname("%"))<CR>
+autocmd FileType python nnoremap<buffer> <F5> :call VimuxRunCommand("python " . fnamemodify(@%, ':p'))<CR>
 
 " Toggle Nerdtree
 map <leader>f :NERDTreeToggle<CR>
