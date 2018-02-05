@@ -118,6 +118,12 @@ let mapleader=","
 "autocmd FileType python nnoremap<buffer> <F5> :call VimuxRunCommand("python " . bufname("%"))<CR>
 autocmd FileType python nnoremap<buffer> <F5> :w<CR>:call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("python " . fnamemodify(@%, ':p'))<CR>
 
+autocmd FileType cpp nnoremap<buffer> <F6> :w<CR>:call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("./make")<CR>
+autocmd Filetype cpp nnoremap<buffer> <F5> :call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("./run")<CR>
+
+nnoremap <leader>rr :VimuxPromptCommand<CR>
+nnoremap <leader>rl :VimuxRunLastCommand<CR>
+
 " Zoom runner
 "map <Leader>z :VimuxZoomRunner<CR>
 
@@ -137,5 +143,5 @@ function! VimuxZoomInspectRunner()
 endfunction
 
 "nnoremap <leader>z :call VimuxZoomInspectRunner()<CR>
-nnoremap <leader>z :call VimuxZoomRunner()<CR>
+nnoremap <leader>z :call VimuxZoomInspectRunner()<CR>
 
