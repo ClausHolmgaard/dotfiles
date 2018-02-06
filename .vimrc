@@ -1,5 +1,7 @@
 autocmd! bufwritepost .vimrc source %
 
+let mapleader=","
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -30,15 +32,18 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'oblitum/YouCompleteMe'
+Plugin 'rdnetto/YCM-Generator'
+Plugin 'davidhalter/jedi-vim'
 Plugin 'benmills/vimux'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jgdavey/tslime.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
-Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ericcurtin/CurtineIncSw.vim'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'sjl/badwolf'
 
 " All of your Plugins must be added before the following line
@@ -67,6 +72,9 @@ set tabstop=4
 
 " for python 2 spaces
 autocmd Filetype python setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+
+" c++
+autocmd Filetype cpp setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
 " ctrl-p cache
 "let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
@@ -97,7 +105,7 @@ let g:tslime_always_current_session = 1
 "let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Disable preview window
-set completeopt-=preview
+"set completeopt-=preview
 
 " Setup YCM and jedi-vim
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -114,7 +122,11 @@ let g:jedi#completions_command = ""
 let g:jedi#show_call_signatures = "1"
 let g:jedi#show_call_signatures_delay = 0
 
-let mapleader=","
+" YCM goto
+nnoremap <leader>gg :YcmCompleter GoTo<CR>
+
+" YCM disable confirm load .ycm_extra_conf.py
+let g:ycm_confirm_extra_conf = 0
 
 " BUffer setup
 set hidden
@@ -152,7 +164,7 @@ let g:ctrlp_custom_ignore = {
 "autocmd FileType python nnoremap<buffer> <F5> :call VimuxRunCommand("python " . bufname("%"))<CR>
 autocmd FileType python nnoremap<buffer> <F5> :w<CR>:call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("python " . fnamemodify(@%, ':p'))<CR>
 
-autocmd FileType cpp nnoremap<buffer> <F6> :w<CR>:call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("./make")<CR>
+autocmd FileType cpp nnoremap<buffer> <F6> :call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("./make")<CR>
 autocmd Filetype cpp nnoremap<buffer> <F5> :call VimuxRunCommand("clear")<CR>:call VimuxRunCommand("./run")<CR>
 
 nnoremap <leader>rr :VimuxPromptCommand<CR>
