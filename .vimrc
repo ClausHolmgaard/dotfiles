@@ -37,6 +37,9 @@ Plugin 'jgdavey/tslime.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'FelikZ/ctrlp-py-matcher'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'ericcurtin/CurtineIncSw.vim'
+Plugin 'sjl/badwolf'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -54,7 +57,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " paste toggle
-set pastetoggle=<f2>
+set pastetoggle=<F4>
 
 " by default, the indent is 4 spaces. 
 set smartindent
@@ -66,10 +69,10 @@ set tabstop=4
 autocmd Filetype python setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
 " ctrl-p cache
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-if executable('ag')
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-endif
+"let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+"if executable('ag')
+"	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"endif
 
 " ctrl-p show hidden
 let g:ctrlp_show_hidden = 1
@@ -111,8 +114,39 @@ let g:jedi#completions_command = ""
 let g:jedi#show_call_signatures = "1"
 let g:jedi#show_call_signatures_delay = 0
 
-
 let mapleader=","
+
+" BUffer setup
+set hidden
+nmap <F1> :bprevious<CR>
+nmap <F2> :bnext<CR>
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+nmap <F3> :bp <BAR> bd #<CR>
+
+" CurtineIncSw, Switch between .c* and .h*
+map <leader>sw :call CurtineIncSw()<CR>
+
+" Airline
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" Ctrl-P
+" Use the nearest .git directory as the cwd
+" This makes a lot of sense if you are working on a project that is in version
+" control. It also supports works with .svn, .hg, .bzr.
+"let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_working_path_mode = '0'
+
+" Setup some default ignores
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site|build)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+"nmap <leader>o :CtrlPMRU<cr>
 
 " Run python files
 "autocmd FileType python nnoremap<buffer> <F5> :call VimuxRunCommand("python " . bufname("%"))<CR>
@@ -144,4 +178,7 @@ endfunction
 
 "nnoremap <leader>z :call VimuxZoomInspectRunner()<CR>
 nnoremap <leader>z :call VimuxZoomInspectRunner()<CR>
+
+" Set colorscheme
+colorscheme badwolf
 
