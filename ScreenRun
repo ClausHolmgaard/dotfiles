@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo $1
+screen -S "$1" -X stuff "$2"`echo -ne '\015'`
+
